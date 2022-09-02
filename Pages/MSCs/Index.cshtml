@@ -1,0 +1,33 @@
+﻿@page
+@model WebApplication2.Pages.MSCs.IndexModel
+@{
+}
+
+<h2>List of Available master_station_codes</h2>
+@*<a class='btn btn-primary btn-sm' href='/MSCs/info'>View Info</a>*@
+<table class="table table-bordered" style="width:200px;table-layout:fixed">
+    <thead>
+        <tr>
+            <th>master_station_code</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.avaiable_codes)
+        {
+        <tr>
+            <td>
+                @item.code
+            </td>
+            <td>
+                    <a class='btn btn-primary btn-sm' href='/MSCs/info?msc=@item.code'>View Info</a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+

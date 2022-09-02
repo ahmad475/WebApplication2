@@ -1,0 +1,132 @@
+﻿@page
+@model WebApplication2.Pages.MSCs.infoModel
+@{  
+}
+
+
+<style>
+    #wrapper {
+        display: flex;
+        justify-content: space-between;
+        /*background: red;*/
+    }
+</style>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h2>@infoModel.mastercode2</h2>
+
+<div id="wrapper">
+<div class="col-md-4">
+    <form method="GET">
+        @for (var i = 1; i < @Model.member_codes.Count; i++)
+        {
+            @if (Model.mems.Contains(@Model.member_codes[i].memcode))
+            {
+                    <input name="AreChecked" checked="checked" type="checkbox" value="@(Model.member_codes[i].memcode+'_'+@infoModel.mastercode2)" /> @Model.member_codes[i].memcode
+            }else{
+                    <input name="AreChecked" type="checkbox" value="@(Model.member_codes[i].memcode+'_'+@infoModel.mastercode2)" /> @Model.member_codes[i].memcode
+            }
+            <br />
+            }<br /><br /><br />
+                <a class='btn btn-secondary btn-sm' href='/MSCs/Index'>Exit Application</a>
+            <button class="btn btn-secondary btn-sm">Populate Data in Tree</button>
+    </form>
+</div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <script language="javascript" type="text/javascript">
+        function windowClose() {
+            window.open('', '_parent', '');
+            window.close();
+        }
+    </script>
+    
+
+      
+
+<div>
+    @if (Model.mems.Any())
+    {
+        <h2>
+            Parent Child Part: @Model.mastercode\ 
+                @for(int i =0;i<@Model.mems.Count();i++)
+                {
+                    if (i == @Model.mems.Count()-1)
+                    {
+                        @(Model.mems.ElementAt(i)) 
+                    }else{
+                        @(Model.mems.ElementAt(i)) <span>,</span>
+                    }
+                    
+                }
+        </h2>
+
+            <h4 style="color:lightgreen">
+           Current Selection: @Model.mastercode\
+                @for (int i = 0; i < @Model.mems.Count(); i++)
+                {
+                    if (i == @Model.mems.Count() - 1)
+                    {
+                        @(Model.mems.ElementAt(i))
+                    }
+                    else
+                    {
+                        @(Model.mems.ElementAt(i)) <span>,</span>
+                    }
+                }
+        </h4>
+
+
+
+        <table class="table table-bordered" style="width:800px;table-layout:fixed">
+        <thead>
+            <tr>
+                        <th style="background-color:lightgray;">@infoModel.sql_stored_procedure_global.ElementAt(0).ElementAt(0)</th>
+                        <th style="background-color:lightgray;">@infoModel.sql_stored_procedure_global.ElementAt(1).ElementAt(0)</th>
+                        <th style="background-color:lightgray;">@infoModel.sql_stored_procedure_global.ElementAt(2).ElementAt(0)</th>
+                        <th style="background-color:lightgray;">@infoModel.sql_stored_procedure_global.ElementAt(3).ElementAt(0)</th>
+            </tr>
+        </thead>
+            <tbody>         
+                @for (var i = 1; i < @infoModel.sql_stored_procedure_global.ElementAt(0).Count(); i++)
+                {
+                <tr>
+                    <td>@infoModel.sql_stored_procedure_global.ElementAt(0).ElementAt(i)</td>
+                    <td>@infoModel.sql_stored_procedure_global.ElementAt(1).ElementAt(i)</td>
+                    <td>@infoModel.sql_stored_procedure_global.ElementAt(2).ElementAt(i)</td>
+                    <td>@infoModel.sql_stored_procedure_global.ElementAt(3).ElementAt(i)</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    <table class="table table-bordered" style="width:800px;table-layout:fixed">
+        <thead>
+            <tr>
+                        <th style="background-color:lightgray;">Total</th>
+                <td style="background-color:lightgreen;">@infoModel.table2info.ElementAt(0)</td>
+                <td style="background-color:orangered;">@infoModel.table2info.ElementAt(1)</td>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td></td>
+                <td style="background-color:lightgreen;">@infoModel.table2info.ElementAt(2)</td>
+                <td style="background-color:orangered;">@infoModel.table2info.ElementAt(3)</td>
+                </tr>
+        </tbody>
+    </table>
+    }else{
+        <h2></h2>
+    }
+</div>
+</div>
